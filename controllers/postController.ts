@@ -13,21 +13,21 @@ interface IRequest extends Request {
 }
 
 // * to be used when multiple bloggers are writing
-const getID = async ( req: IRequest ): Promise<any> => {
-    let token: string | undefined;
-    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-        try {
-            token = req.headers.authorization.split(' ')[1]
-            const decoded = jwt.verify(token, process.env.JWT_SECRET || '')
-            if (typeof decoded === 'object') {
-                const user = await User.findById(decoded.id).select('-password')
-                return user
-            }
-        } catch {
-            throw new Error('Cannot find user in GetID')
-        }
-    }
-}
+// const getID = async ( req: IRequest ): Promise<any> => {
+//     let token: string | undefined;
+//     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+//         try {
+//             token = req.headers.authorization.split(' ')[1]
+//             const decoded = jwt.verify(token, process.env.JWT_SECRET || '')
+//             if (typeof decoded === 'object') {
+//                 const user = await User.findById(decoded.id).select('-password')
+//                 return user
+//             }
+//         } catch {
+//             throw new Error('Cannot find user in GetID')
+//         }
+//     }
+// }
 
 
 
@@ -62,6 +62,8 @@ const setPost = asyncHandler(async (req:any, res:any) => {
 // @access  Private
 const updatePost = asyncHandler(async (req:any, res:any) => {
     const post = await Post.findById(req.params.id)
+
+    //* Works with no user connected or required
 
     if (!post) {
         res.status(400)
