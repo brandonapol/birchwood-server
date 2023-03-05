@@ -63,7 +63,7 @@ const setPost = asyncHandler(async (req:any, res:any) => {
 const updatePost = asyncHandler(async (req:any, res:any) => {
     const post = await Post.findById(req.params.id)
 
-    //* Works with no user connected or required
+    // * Works with no user connected or required
 
     if (!post) {
         res.status(400)
