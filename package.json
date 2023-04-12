@@ -11,8 +11,7 @@
     "build": "npm-run-all clean lint tsc",
     "start": "node dist/server.js",
     "prestart": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "test": "tsc"
   },
   "author": "",
   "license": "MIT",
